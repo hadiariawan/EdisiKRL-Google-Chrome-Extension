@@ -1,0 +1,116 @@
+/* CSS Mini Reset */
+
+html, body, div, form, fieldset, legend, label {
+	margin: 0;
+	padding: 0;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+th, td {
+	text-align: left;
+	vertical-align: top;
+}
+h1, h2, h3, h4, h5, h6, th, td, caption {
+	font-weight:normal;
+}
+img {
+	border: 0;
+}
+
+/**/
+body{
+	font:12px normal Arial, Helvetica, sans-serif;
+	background-color:#fff;
+}
+a{
+	text-decoration:none;
+	color:#999;
+}
+a:hover{
+	color:#666;	
+}
+h2 a{
+color:#000;	
+}
+h2 a:hover{
+color:#666;	
+}
+#logo{
+	border:1px solid #d2d2d2;
+	margin-bottom:10px;	
+}
+#logo a{
+	margin:0;
+	padding:;
+	display:inline-block;
+}
+#posts-list, #posts-list li{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+#posts-list{
+	padding-top:10px;	
+}
+#posts-list li{
+	padding:0 5px 0 5px;
+	margin-bottom:10px;
+	border-bottom:1px solid #d2d2d2;
+	display:block;
+	clear:both;
+	overflow:hidden;
+	background:transparent url(../images/bg.jpg) left bottom repeat-x;
+}
+#posts-list li img{
+	float:left;
+	margin-right:10px;
+	padding:3px;
+	border:1px solid #ccccff;
+}
+#posts-list li h2{
+	font-size:16px;
+	font-family:Georgia, "Times New Roman", Times, serif;
+	line-height:1em;
+	margin-top:0;
+	margin-bottom:5px;
+	font-weight:normal;
+	letter-spacing:0.02em;
+}
+#posts-list li span{
+	font-size:11px;
+	font-style:italic;
+	color:#333;
+	margin-bottom:10px;
+	clear:both;
+	display:block;
+}
+#posts-list li .content{
+	display:block;
+	overflow:hidden;
+	clear:both;
+	margin-bottom:10px;
+}
+#posts-list li .content p{
+	margin-top:0;	
+}
+.active span{
+	padding-bottom:7px;
+	border-bottom:1px dotted #ccc;	
+}
+.readmore{
+	font-size:9px;
+	letter-spacing:-0.05em;
+	background-color:#030;
+	color:#FFF;
+	text-transform:uppercase;
+	padding:2px 5px;
+}
+.readmore:hover{
+	background-color:red;
+	color:#FFF;
+}
+#posts-list li.active{
+	
+}

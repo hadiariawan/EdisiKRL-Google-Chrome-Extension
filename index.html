@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>edisiKRL.com for Google Chrome</title>
+<script src="js/jquery.1.6.2.js" type="application/javascript"></script>
+<link rel="stylesheet" type="text/css" href="styles/style.css"/>
+</head>
+<body>
+<div id="logo">
+    <a target="_blank" href="http://edisikrl.com">
+        <img src="images/logo.jpg" width="343" height="80"/>
+    </a>
+</div>
+<ul id="posts-list">
+    <!--
+	<li class="post odd"><h2><a href="#" rel="content-1">Tips Menahan Kebelet BAB di KRL</a></h2>
+        <span>Posted on July 14, 2011 by <a href="#">TukangIntip</a></span>
+        <div id="content-1" class="content">
+        <p>Selamat sore semuanya, kali ini TukangIntip mencoba membahas pertanyaan dari salah satu follower twitter @edisiKRL. Pertanyaannya lucu tapi serius tapi adalah hal yang mungkin sering dialami penumpang KRL. Pertanyaannya adalah…</p>
+        <a href="" class="readmore">Read More</a>
+        </div>
+    </li>
+	<li class="post even"><h2><a href="#" rel="content-2">Pergi ke Serpong Bersama Kambing di KRL</a></h2>
+        <span>Posted on July 12, 2011 by <a href="#">TukangIntip</a></span>
+        <div id="content-2" class="content">
+        <img src="serpong-sama-kambing.jpg" width="100" height="100" />
+        <p>TukangIntip kembali mendapat kiriman gambar dahsyat dari pembaca setia edisikrl.com, kali ini di KRL ada kambingnya. Kemarin TukangIntip pernah posting ada harley davidson di KRL, nah kali ini lebih spektakuler full power mega max… dahsyat!</p>
+        <a href="" class="readmore">Read More</a>
+        </div>
+    </li>
+    -->
+</ul>
+<script type="text/javascript">       
+   
+    function getDay(day) {
+        var name = day == 0 ? "Minggu" : name;
+        name = day == 1 ? "Senin" : "";
+        name = day == 2 ? "Selasa" : name;
+        name = day == 3 ? "Rabu" : name;
+        name = day == 4 ? "Kamis" : name;
+        name = day == 5 ? "Jum'at" : name;
+        name = day == 6 ? "Sabtu" : name;
+        return name;
+    }
+    
+    function parseRss() {
+        $("#posts-list").empty();
+        
+        $.ajax({
+            type: 'GET',
+            url: 'http://edisikrl.com/feed',
+            dataType: 'xml',
+            success: function(xml) {
+                var i = 0;
+                $('item', xml).each(function(){
+                    //if(i++ < 5) {
+                        var title = $(this).find('title').eq(0).text();
+                        var link = $(this).find('link').eq(0).text();
+                        var description = $(this).find('description').eq(0).text();
+                        var pubDate = $(this).find('pubDate').eq(0).text(); 
+                        var author = $(this).find('creator'); 
+                        var imageUrl = $(this).find('enclosure').attr('url');
+                        
+                        var d = new Date(pubDate);
+                        var month = d.getMonth() + 1
+                        var date = d.getDate()
+                        var year = d.getFullYear();                        
+                        var hour = d.getHours();
+                        var min = d.getMinutes();
+                        var day = d.getDay();
+                        day = getDay(day);
+                        pubDate = day + " " + date + "/" + month + "/" + year + " " + hour + ":" + min;
+                        
+                        var classNum = '';
+                        if(i % 2 ==  0){
+                            classNum = ' even';
+                        }else{
+                            classNum = ' odd';
+                        }
+                        
+                        postItem = '<li class="post' + classNum + '"><h2><a href="#" rel="content-'+ i +'">' + title + '</a></h2>';
+                            postItem += '<span>Posted on ' + pubDate; 
+                            //postItem += ' by <a href="#">'+ author +'</a></span>';
+                            postItem += '<div id="content-'+ i +'" class="content">';
+                            if(typeof imageUrl !== 'undefined'){
+                            postItem += '<img src="'+ imageUrl +'" width="100" height="100" />';
+                            }
+                            postItem += '<p>' + description + '</p>';
+                            postItem += '<a href="'+link+'" target="_blank" class="readmore">Read More</a>';
+                            postItem += '</div>';
+                        postItem += '</li>';
+                        
+                        $("#posts-list").append(postItem);                                  
+                    //}
+                    i++;
+                });
+            },
+            error: function(){
+                strMessage  = '<li class="post odd">';
+                strMessage  += '<h2>Silahkan kunjungi <a href="http://edisikrl.com">edisikrl.com</a> langsung :)</h2>';
+                strMessage  += '<span><a href="http://edisikrl.com" class="readmore">Telah terjadi error saat pemgambilan data.</a></span>';
+                strMessage  += '<p>Follow twitter <a href="http://twitter.com/edisiKRL">@edisiKRL</a> dan share tweet kamu dengan hashtag <strong>#edisiKRL</strong>.</p>';
+                strMessage  += '</li>';
+                $("#posts-list").append(strMessage); 
+            }        
+        });     
+    }
+    
+    $(document).ready(function() {
+    
+        parseRss();
+        
+		$(".post h2 a").click(function () { 
+			$target = $(this).attr("rel");
+			$('#'+$target).slideToggle("fast", function () {
+				if ($(this).parent().is('.active')) {
+				//#elm has the class
+					$(this).parent().removeClass("active");
+				} else {
+					$(this).parent().addClass("active");
+				//#elm doesn't have the class
+				}
+			});
+		});
+	});
+</script>
+</body>
+</html>

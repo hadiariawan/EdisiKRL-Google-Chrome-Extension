@@ -1,0 +1,16 @@
+{
+   "browser_action": {
+      "default_icon": "images/icons/64.png",
+      "default_title": "edisiKRL.com",
+      "popup": "index.html"
+   },
+   "description": "Ekstensi edisiKRL.com untuk Google Chrome, follow twitter @edisiKRL dan share tweet kamu dengan hashtag #edisiKRL.",
+   "homepage_url": "http://edisikrl.com",
+   "icons": {
+      "128": "images/icons/128.png",
+      "64": "images/icons/64.png"
+   },
+   "name": "edisiKRL.com",
+   "permissions": [ "tabs", "http://*.edisikrl.com/*" ],
+   "version": "1.0"
+}
